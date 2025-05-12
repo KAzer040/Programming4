@@ -1,0 +1,140 @@
+{
+    "restaurants": [
+        {
+            "id": 1,
+            "name": "Din Tai Fung",
+            "image": "assert/1.jpg",
+            "location": "68 Yee Wo Street, Causeway Bay, Hong Kong",
+            "specialty": "Xiao Long Bao (Soup Dumplings)",
+            "features": "World-renowned for its delicate soup dumplings and Taiwanese-style service, Din Tai Fung offers a refined dim sum experience.."
+        },
+        {
+            "id": 2,
+            "name": "Mr. Chow",
+            "image": "assert/2.jpg",
+            "location": "344 N Camden Dr, Beverly Hills, CA, USA",
+            "specialty": "Beijing Duck",
+            "features": "A celebrity hotspot combining upscale dining with classic Chinese flavors, particularly known for its elegant Peking duck and theatrical service."
+        },
+        {
+            "id": 3,
+            "name": "Lung King Heen",
+            "image": "assert/3.jpg",
+            "location": "Four Seasons Hotel, 8 Finance Street, Central, Hong Kong",
+            "specialty": "Baked Abalone Puff with Diced Chicken",
+            "features": "The world's first Chinese restaurant awarded three Michelin stars, known for exquisite Cantonese cuisine and top-tier dim sum."
+        },
+        {
+            "id": 4,
+            "name": "Hakkasan",
+            "image": "assert/4.jpg",
+            "location": "17 Bruton Street, Mayfair, London, UK",
+            "specialty": "Crispy Duck Salad",
+            "features": "A high-end modern Chinese restaurant offering a fusion of traditional dishes with contemporary presentation and club-like ambiance."
+        },
+        {
+            "id": 5,
+            "name": "Jade Garden",
+            "image": "assert/5.jpg",
+            "location": "123 Nathan Road, Tsim Sha Tsui, Hong Kong",
+            "specialty": "Cantonese Roasted Goose",
+            "features": "A popular local chain in Hong Kong known for affordable Cantonese classics and stylish interiors."
+        },
+        {
+            "id": 6,
+            "name": "Shàng Palace",
+            "image": "assert/6.jpg",
+            "location": "Shangri-La Hotel, 10 Avenue d'Iéna, Paris, France",
+            "specialty": "Braised Sea Cucumber with Abalone",
+            "features": "Offering refined Chinese dining in the heart of Paris, with Michelin-starred Sichuan and Cantonese delicacies."
+        },
+        {
+            "id": 7,
+            "name": "HuTong",
+            "image": "assert/7.jpg",
+            "location": "Level 33, The Shard, 31 St Thomas Street, London, UK",
+            "specialty": "Red Lantern Soft Shell Crab",
+            "features": "Known for its spectacular views and fiery northern Chinese cuisine, especially Sichuan-style dishes."
+        },
+        {
+            "id": 8,
+            "name": "Lao Sze Chuan",
+            "image": "assert/8.jpg",
+            "location": "2172 S Archer Ave, Chicago, IL, USA",
+            "specialty": "Chef Tony's Dry Chili Chicken",
+            "features": "A beloved Chicago institution serving authentic and bold Sichuan flavors, popular among both locals and Chinese expats."
+        },
+        {
+            "id": 9,
+            "name": "Da Dong Roast Duck",
+            "image": "assert/9.jpg",
+            "location": "5/F, Jinbao Tower, 88 Jinbao Street, Beijing, China",
+            "specialty": "Superlean Roast Duck",
+            "features": "One of Australia's most prestigious Chinese restaurants, offering traditional Cantonese cuisine in a fine-dining setting."
+        },
+        {
+            "id": 10,
+            "name": "Sea Harbour Seafood Restaurant",
+            "image": "assert/10.jpg",
+            "location": "3939 Rosemead Blvd, Rosemead, CA, USA",
+            "specialty": "Dim Sum (Shrimp Dumplings, Pork Buns)",
+            "features": "A top destination for dim sum in Los Angeles, praised for its fresh ingredients and authentic flavors."
+        },
+        {
+            "id": 11,
+            "name": "HaiDiLao Hot Pot",
+            "image": "assert/11.jpg",
+            "location": "1 Harbourfront Walk, #03-10, VivoCity, Singapore",
+            "specialty": "Spicy Sichuan Hot Pot",
+            "features": "Globally recognized for its interactive hot pot experience and exceptional customer service, including free snacks and manicures."
+        },
+        {
+            "id": 12,
+            "name": "The Eight",
+            "image": "assert/12.jpg",
+            "location": "Grand Lisboa Hotel, Avenida de Lisboa, Macau, China",
+            "specialty": "Goldfish Shrimp Dumplings",
+            "features": "A three-Michelin-star Cantonese restaurant known for elegant dim sum shaped like animals and luxurious banquet dishes."
+        },
+        {
+            "id": 13,
+            "name": "Mott 32",
+            "image": "assert/13.jpg",
+            "location": "108 Des Voeux Road Central, Standard Chartered Bank Building, Hong Kong",
+            "specialty": "Applewood Roasted Peking Duck",
+            "features": "A stylish modern Chinese restaurant blending traditional recipes with premium ingredients and a chic interior design."
+        },
+        {
+            "id": 14,
+            "name": "Yu's Family Kitchen ",
+            "image": "assert/14.jpg",
+            "location": "43 Zhai Xiang Zi, Kuanzhai Alley, Chengdu, China",
+            "specialty": "24-course Sichuan Tasting Menu",
+            "features": "An intimate and innovative private kitchen in Chengdu offering sophisticated multi-course meals highlighting Sichuan cuisine’s depth."
+        },
+        {
+            "id": 15,
+            "name": "Red Farm",
+            "image": "assert/15.jpg",
+            "location": "529 Hudson St, New York, NY, USA",
+            "specialty": "Pac-Man Shrimp Dumplings",
+            "features": "A quirky, farm-to-table Chinese eatery known for its creative dim sum and casual yet gourmet experience in the West Village."
+        },
+        {
+            "id": 16,
+            "name": "Mandarin Kitchen",
+            "image": "assert/16.jpg",
+            "location": "14-16 Queensway, London W2 3RX, UK",
+            "specialty": "Lobster with Ginger and Spring Onion",
+            "features": "A longtime favorite in London's Bayswater area, especially known for its generous seafood portions and Hong Kong-style cooking."
+        },
+        {
+            "id": 17,
+            "name": "Tim Ho Wan",
+            "image": "assert/17.jpg",
+            "location": "9-11 Fuk Wing Street, Sham Shui Po, Kowloon, Hong Kong",
+            "specialty": "Baked BBQ Pork Buns",
+            "features": "Once called “the world's cheapest Michelin-star restaurant,” this humble dim sum spot is famous for flavorful, affordable bites."
+        }
+    ]
+} 
