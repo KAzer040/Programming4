@@ -208,7 +208,7 @@ function setupSearch() {
         } else {
             // 从原始数据中过滤
             allRestaurants = originalRestaurants.filter(restaurant => {
-                const text = `${restaurant.id} ${restaurant.name} ${restaurant.location} ${restaurant.specialty} ${restaurant.features}`.toLowerCase();
+                const text = ` ${restaurant.name} ${restaurant.location} ${restaurant.specialty} ${restaurant.features}`.toLowerCase();
                 return text.includes(searchTerm);
             });
         }
@@ -219,6 +219,32 @@ function setupSearch() {
         renderPagination();
         addReadMoreEvents();
         addDetailsEvents();
+    });
+
+     document.querySelectorAll('.linchemi-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const searchTerm = item.textContent.toLowerCase();
+            // 将点击的文本内容填充到搜索框中
+            searchInput.value = searchTerm;
+            // 从原始数据中过滤
+            allRestaurants = originalRestaurants.filter(restaurant => {
+                const text = `${restaurant.cuisine}`.toLowerCase();
+                return text.includes(searchTerm);
+            });
+
+            currentPage = 1;
+            totalPages = Math.ceil(allRestaurants.length / itemsPerPage);
+            renderRestaurants();
+            renderPagination();
+            addReadMoreEvents();
+            addDetailsEvents();
+
+            // 跳转到 #restaurants section
+            const restaurantsSection = document.getElementById('restaurants');
+            if (restaurantsSection) {
+                restaurantsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
     });
     
     // 添加预定按钮事件
