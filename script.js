@@ -1,37 +1,34 @@
-// 全局变量
+
 let currentPage = 1;
 const itemsPerPage = 12;
 let totalPages = 1;
 let allRestaurants = [];
-let originalRestaurants = []; // 添加一个变量来存储原始数据
+let originalRestaurants = []; 
 
-// 餐厅数据加载和渲染
+
 async function loadRestaurants() {
     try {
         const response = await fetch('restaurants.json');
         const data = await response.json();
         allRestaurants = data.restaurants;
-        originalRestaurants = [...data.restaurants]; // 保存原始数据
+        originalRestaurants = [...data.restaurants]; 
         totalPages = Math.ceil(allRestaurants.length / itemsPerPage);
 
         renderRestaurants();
         renderPagination();
 
-        // 添加卡片动画效果
-        animateCards();
-        // 添加阅读更多按钮事件
+       
+        animateCards();  
         addReadMoreEvents();
-        // 添加详情按钮事件
         addDetailsEvents();
     } catch (error) {
         console.error('Error loading restaurants:', error);
     }
 }
 
-// 渲染餐厅卡片
 function renderRestaurants() {
     const container = document.getElementById('restaurantContainer');
-    container.innerHTML = ''; // 清空容器
+    container.innerHTML = ''; 
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -59,13 +56,11 @@ function renderRestaurants() {
     });
 }
 
-// 渲染分页导航
 function renderPagination() {
     const container = document.getElementById('restaurantContainer');
     const paginationDiv = document.createElement('div');
     paginationDiv.className = 'pagination';
 
-    // 上一页按钮
     const prevButton = document.createElement('button');
     prevButton.className = 'pagination-btn';
     prevButton.textContent = '<';
@@ -75,10 +70,8 @@ function renderPagination() {
             currentPage--;
             renderRestaurants();
             renderPagination();
-            // 添加事件监听
             addReadMoreEvents();
             addDetailsEvents();
-            // 滚到动餐厅部分
             const restaurantsSection = document.getElementById('restaurants');
             if (restaurantsSection) {
                 restaurantsSection.scrollIntoView({ behavior: 'smooth' });
@@ -86,7 +79,6 @@ function renderPagination() {
         }
     });
 
-    // 页码按钮
     const pageButtons = [];
     for (let i = 1; i <= totalPages; i++) {
         const pageButton = document.createElement('button');
@@ -96,10 +88,8 @@ function renderPagination() {
             currentPage = i;
             renderRestaurants();
             renderPagination();
-            // 添加事件监听
             addReadMoreEvents();
             addDetailsEvents();
-            // 滚动到页面顶部
             const restaurantsSection = document.getElementById('restaurants');
             if (restaurantsSection) {
                 restaurantsSection.scrollIntoView({ behavior: 'smooth' });
@@ -108,7 +98,6 @@ function renderPagination() {
         pageButtons.push(pageButton);
     }
 
-    // 下一页按钮
     const nextButton = document.createElement('button');
     nextButton.className = 'pagination-btn';
     nextButton.textContent = '>';
@@ -118,10 +107,8 @@ function renderPagination() {
             currentPage++;
             renderRestaurants();
             renderPagination();
-            // 添加事件监听
             addReadMoreEvents();
             addDetailsEvents();
-            // 滚动到页面顶部
             const restaurantsSection = document.getElementById('restaurants');
             if (restaurantsSection) {
                 restaurantsSection.scrollIntoView({ behavior: 'smooth' });
@@ -129,28 +116,23 @@ function renderPagination() {
         }
     });
 
-    // 添加页码信息
     const pageInfo = document.createElement('span');
     pageInfo.className = 'pagination-info';
     pageInfo.textContent = `Page ${currentPage} , total of ${totalPages} pages`;
 
-    // 组装分页导航
     paginationDiv.appendChild(prevButton);
     pageButtons.forEach(btn => paginationDiv.appendChild(btn));
     paginationDiv.appendChild(nextButton);
     paginationDiv.appendChild(pageInfo);
 
-    // 移除已存在的分页导航
     const existingPagination = document.querySelector('.pagination');
     if (existingPagination) {
         existingPagination.remove();
     }
 
-    // 添加新的分页导航
     container.parentNode.insertBefore(paginationDiv, container.nextSibling);
 }
 
-// 卡片动画效果
 function animateCards() {
     const cards = document.querySelectorAll('.restaurant-card');
     const observer = new IntersectionObserver((entries) => {
@@ -170,7 +152,6 @@ function animateCards() {
     });
 }
 
-// 阅读更多按钮功能
 function addReadMoreEvents() {
     const readMoreBtns = document.querySelectorAll('.read-more-btn');
     readMoreBtns.forEach(btn => {
@@ -189,7 +170,7 @@ function addReadMoreEvents() {
     });
 }
 
-// 搜索功能
+// search function
 function setupSearch() {
     const searchContainer = document.createElement('div');
     searchContainer.className = 'search-container';
@@ -212,10 +193,8 @@ function setupSearch() {
     searchInput.addEventListener('input', function () {
         const searchTerm = this.value.toLowerCase();
         if (searchTerm === '') {
-            // 如果搜索框为空，恢复原始数据
             allRestaurants = [...originalRestaurants];
         } else {
-            // 从原始数据中过滤
             allRestaurants = originalRestaurants.filter(restaurant => {
                 const text = ` ${restaurant.name} ${restaurant.location} ${restaurant.specialty} ${restaurant.features}`.toLowerCase();
                 return text.includes(searchTerm);
@@ -233,9 +212,7 @@ function setupSearch() {
     document.querySelectorAll('.linchemi-item').forEach(item => {
         item.addEventListener('click', () => {
             const searchTerm = item.textContent.toLowerCase();
-            // 将点击的文本内容填充到搜索框中
             searchInput.value = searchTerm;
-            // 从原始数据中过滤
             allRestaurants = originalRestaurants.filter(restaurant => {
                 const text = `${restaurant.cuisine}`.toLowerCase();
                 return text.includes(searchTerm);
@@ -248,7 +225,6 @@ function setupSearch() {
             addReadMoreEvents();
             addDetailsEvents();
 
-            // 跳转到 #restaurants section
             const restaurantsSection = document.getElementById('restaurants');
             if (restaurantsSection) {
                 restaurantsSection.scrollIntoView({ behavior: 'smooth' });
@@ -256,7 +232,6 @@ function setupSearch() {
         });
     });
 
-    // 添加预定按钮事件
     reservationsBtn.addEventListener('click', () => {
         const reservationsOverlay = document.getElementById('reservationsOverlay');
         reservationsOverlay.style.display = 'flex';
@@ -264,7 +239,7 @@ function setupSearch() {
     });
 }
 
-// 滚动到顶部按钮
+// scroll to top
 function setupScrollToTop() {
     const scrollButton = document.createElement('button');
     scrollButton.className = 'scroll-to-top';
@@ -287,7 +262,6 @@ function setupScrollToTop() {
     });
 }
 
-// 添加加载动画
 function showLoadingAnimation() {
     const loadingDiv = document.createElement('div');
     loadingDiv.className = 'loading-animation';
@@ -299,7 +273,6 @@ function showLoadingAnimation() {
     });
 }
 
-// 详情按钮功能
 function addDetailsEvents() {
     const detailsBtns = document.querySelectorAll('.details-btn');
     detailsBtns.forEach(btn => {
@@ -310,7 +283,6 @@ function addDetailsEvents() {
     });
 }
 
-// 显示餐厅详情
 async function showRestaurantDetails(restaurantId) {
     try {
         const response = await fetch('restaurants.json');
@@ -319,7 +291,6 @@ async function showRestaurantDetails(restaurantId) {
 
         if (!restaurant) return;
 
-        // 创建详情页面
         const detailsOverlay = document.createElement('div');
         detailsOverlay.className = 'details-overlay';
         detailsOverlay.innerHTML = `
@@ -371,61 +342,56 @@ async function showRestaurantDetails(restaurantId) {
         document.body.appendChild(detailsOverlay);
         document.body.style.overflow = 'hidden';
 
-        // 初始化地图
-        const mapElement = document.getElementById('map'); // 确保地图容器的 ID 是 'map'
+        const mapElement = document.getElementById('map');
 
-        // 根据餐厅位置设置地图中心点
         let mapCenter;
         if (restaurant.location.includes('China')) {
-            mapCenter = new BMap.Point(104.1954, 35.8617); // 中国
+            mapCenter = new BMap.Point(104.1954, 35.8617); // 中国 CN
         } else if (restaurant.location.includes('Japan')) {
-            mapCenter = new BMap.Point(138.2529, 36.2048); // 日本
+            mapCenter = new BMap.Point(138.2529, 36.2048); // 日本 JP
         } else if (restaurant.location.includes('Korea')) {
-            mapCenter = new BMap.Point(127.7669, 35.9078); // 韩国
+            mapCenter = new BMap.Point(127.7669, 35.9078); // 韩国 KR
         } else if (restaurant.location.includes('Singapore')) {
-            mapCenter = new BMap.Point(103.8198, 1.3521); // 新加坡
+            mapCenter = new BMap.Point(103.8198, 1.3521); // 新加坡 SG
         } else if (restaurant.location.includes('USA') || restaurant.location.includes('United States')) {
-            mapCenter = new BMap.Point(-95.7129, 37.0902); // 美国
+            mapCenter = new BMap.Point(-95.7129, 37.0902); // 美国 US
         } else if (restaurant.location.includes('UK') || restaurant.location.includes('United Kingdom')) {
-            mapCenter = new BMap.Point(-3.4360, 55.3781); // 英国
+            mapCenter = new BMap.Point(-3.4360, 55.3781); // 英国 UK
         } else if (restaurant.location.includes('Australia')) {
-            mapCenter = new BMap.Point(133.7751, -25.2744); // 澳大利亚
+            mapCenter = new BMap.Point(133.7751, -25.2744); // 澳大利亚 AUS
         } else if (restaurant.location.includes('Canada')) {
-            mapCenter = new BMap.Point(-106.3468, 56.1304); // 加拿大
+            mapCenter = new BMap.Point(-106.3468, 56.1304); // 加拿大 CAN
         } else {
-            mapCenter = new BMap.Point(-80, -80); // 默认中国
+            mapCenter = new BMap.Point(-80, -80); 
         }
 
-        // 创建地图
-        const map = new BMap.Map(mapElement); // 创建地图实例
-        map.centerAndZoom(mapCenter, 4); // 设置中心点和初始缩放级别
+        const map = new BMap.Map(mapElement);
+        map.centerAndZoom(mapCenter, 4); 
 
-        // 添加标记
-        const marker = new BMap.Marker(mapCenter); // 创建标记
-        map.addOverlay(marker); // 将标记添加到地图上
 
-        // 绑定弹窗
+        const marker = new BMap.Marker(mapCenter); 
+        map.addOverlay(marker); 
+
+   
         const popupContent = `<b>${restaurant.name}</b><br>${restaurant.location}`;
         const infoWindow = new BMap.InfoWindow(popupContent, {
-            width: 200, // 信息窗口宽度
-            height: 100, // 信息窗口高度
-            title: "餐厅信息" // 信息窗口标题
+            width: 200, 
+            height: 100, /
+            title: "Informatin of the restaurant" 
         });
         marker.addEventListener("click", function () {
-            map.openInfoWindow(infoWindow, mapCenter); // 点击标记时打开信息窗口
+            map.openInfoWindow(infoWindow, mapCenter); 
         });
 
-        // 开启鼠标滚轮缩放功能
+
         map.enableScrollWheelZoom(true);
 
-        // 添加关闭按钮事件
         const closeBtn = detailsOverlay.querySelector('.close-btn');
         closeBtn.addEventListener('click', () => {
             document.body.removeChild(detailsOverlay);
             document.body.style.overflow = '';
         });
 
-        // 点击遮罩层关闭
         detailsOverlay.addEventListener('click', (e) => {
             if (e.target === detailsOverlay) {
                 document.body.removeChild(detailsOverlay);
@@ -433,7 +399,6 @@ async function showRestaurantDetails(restaurantId) {
             }
         });
 
-        // 添加预定按钮事件
         const reserveBtn = detailsOverlay.querySelector('.reserve-btn');
         reserveBtn.addEventListener('click', () => {
             showReservationForm(restaurant);
@@ -443,7 +408,6 @@ async function showRestaurantDetails(restaurantId) {
     }
 }
 
-// 显示预定表单
 function showReservationForm(restaurant) {
     const reservationOverlay = document.createElement('div');
     reservationOverlay.className = 'reservation-overlay';
@@ -489,25 +453,21 @@ function showReservationForm(restaurant) {
 
     document.body.appendChild(reservationOverlay);
 
-    // 添加关闭按钮事件
     const closeBtn = reservationOverlay.querySelector('.close-btn');
     closeBtn.addEventListener('click', () => {
         document.body.removeChild(reservationOverlay);
     });
 
-    // 点击遮罩层关闭
     reservationOverlay.addEventListener('click', (e) => {
         if (e.target === reservationOverlay) {
             document.body.removeChild(reservationOverlay);
         }
     });
 
-    // 处理表单提交
     const form = reservationOverlay.querySelector('#reservationForm');
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        // 获取表单数据
         const formData = new FormData(form);
         const reservation = {
             id: Date.now(),
@@ -521,10 +481,8 @@ function showReservationForm(restaurant) {
             requests: formData.get('notes')
         };
 
-        // 保存预定数据
         const reservations = JSON.parse(localStorage.getItem('reservations')) || [];
 
-        // 检查是否存在相同的预订
         const isDuplicate = reservations.some(r =>
             r.restaurantName === reservation.restaurantName &&
             r.date === reservation.date &&
@@ -536,17 +494,17 @@ function showReservationForm(restaurant) {
         if (!isDuplicate) {
             reservations.push(reservation);
             localStorage.setItem('reservations', JSON.stringify(reservations));
-            // 显示成功消息
+     
             showSuccessMessage(restaurant);
         } else {
-            // 显示重复预订提示
+           
             alert('You have reserved the restaurant at the same time. Please choose another time or restaurant.');
         }
         document.body.removeChild(reservationOverlay);
     });
 }
 
-// 显示预定成功消息
+
 function showSuccessMessage(restaurant) {
     const successOverlay = document.createElement('div');
     successOverlay.className = 'success-overlay';
@@ -562,14 +520,14 @@ function showSuccessMessage(restaurant) {
 
     document.body.appendChild(successOverlay);
 
-    // 添加关闭按钮事件
+
     const closeBtn = successOverlay.querySelector('.success-close');
     closeBtn.addEventListener('click', () => {
         document.body.removeChild(successOverlay);
     });
 }
 
-// 初始化预定功能
+
 function initReservations() {
     const reservationsBtn = document.querySelector('.my-reservations-btn');
     const reservationsOverlay = document.getElementById('reservationsOverlay');
@@ -581,14 +539,14 @@ function initReservations() {
         return;
     }
 
-    // 移除现有的事件监听器
+
     reservationsBtn.replaceWith(reservationsBtn.cloneNode(true));
     const newReservationsBtn = document.querySelector('.my-reservations-btn');
 
-    // 显示预定列表
+
     newReservationsBtn.addEventListener('click', () => {
         reservationsOverlay.style.display = 'flex';
-        // 确保在显示之前清空列表
+ 
         const reservationsList = document.getElementById('reservationsList');
         if (reservationsList) {
             reservationsList.innerHTML = '';
@@ -596,21 +554,21 @@ function initReservations() {
         loadReservations();
     });
 
-    // 关闭预定列表
+   
     closeReservationsBtn.addEventListener('click', () => {
         reservationsOverlay.style.display = 'none';
-        // 清空列表
+        
         const reservationsList = document.getElementById('reservationsList');
         if (reservationsList) {
             reservationsList.innerHTML = '';
         }
     });
 
-    // 点击遮罩层关闭
+   
     reservationsOverlay.addEventListener('click', (e) => {
         if (e.target === reservationsOverlay) {
             reservationsOverlay.style.display = 'none';
-            // 清空列表
+          
             const reservationsList = document.getElementById('reservationsList');
             if (reservationsList) {
                 reservationsList.innerHTML = '';
@@ -618,22 +576,22 @@ function initReservations() {
         }
     });
 
-    // 初始化时清空列表
+   
     const reservationsList = document.getElementById('reservationsList');
     if (reservationsList) {
         reservationsList.innerHTML = '';
     }
 }
 
-// 加载预定列表
+
 function loadReservations() {
     const reservationsList = document.getElementById('reservationsList');
-    // 确保列表被清空
+    
     if (reservationsList) {
         reservationsList.innerHTML = '';
     }
 
-    // 从本地存储获取预定数据
+
     const reservations = JSON.parse(localStorage.getItem('reservations')) || [];
 
     if (reservations.length === 0) {
@@ -641,7 +599,7 @@ function loadReservations() {
         return;
     }
 
-    // 清除可能存在的旧事件监听器
+
     const oldCards = document.querySelectorAll('.reservation-card');
     oldCards.forEach(card => {
         const oldBtn = card.querySelector('.view-details-btn');
@@ -650,11 +608,11 @@ function loadReservations() {
         }
     });
 
-    // 获取餐厅数据以获取图片
+
     fetch('restaurants.json')
         .then(response => response.json())
         .then(data => {
-            // 清空现有内容
+           
             reservationsList.innerHTML = '';
 
             reservations.forEach(reservation => {
@@ -677,7 +635,7 @@ function loadReservations() {
                 `;
                 reservationsList.appendChild(card);
 
-                // 添加查看详情按钮事件
+                
                 const viewDetailsBtn = card.querySelector('.view-details-btn');
                 viewDetailsBtn.addEventListener('click', () => {
                     showReservationDetails(reservation);
@@ -690,12 +648,12 @@ function loadReservations() {
         });
 }
 
-// 显示预定详情
+
 function showReservationDetails(reservation) {
     const detailsContainer = document.getElementById('reservationDetails');
     const reservationInfo = document.getElementById('reservationInfo');
 
-    // 获取餐厅数据以显示图片和详细信息
+
     fetch('restaurants.json')
         .then(response => response.json())
         .then(data => {
@@ -744,10 +702,10 @@ function showReservationDetails(reservation) {
                 </div>
             `;
 
-            // 添加删除按钮事件监听
+         
             const deleteBtn = document.getElementById('deleteReservation');
             deleteBtn.onclick = () => {
-                // 创建确认对话框
+             
                 const confirmOverlay = document.createElement('div');
                 confirmOverlay.className = 'confirm-dialog-overlay';
                 confirmOverlay.innerHTML = `
@@ -763,35 +721,35 @@ function showReservationDetails(reservation) {
 
                 document.body.appendChild(confirmOverlay);
 
-                // 添加按钮事件
+              
                 const cancelBtn = confirmOverlay.querySelector('.confirm-dialog-btn.cancel');
                 const confirmBtn = confirmOverlay.querySelector('.confirm-dialog-btn.confirm');
 
-                // 取消按钮事件
+              
                 cancelBtn.addEventListener('click', () => {
                     document.body.removeChild(confirmOverlay);
                 });
 
-                // 确认按钮事件
+              
                 confirmBtn.addEventListener('click', () => {
-                    // 移除确认对话框
+                
                     document.body.removeChild(confirmOverlay);
 
-                    // 获取现有预订
+                   
                     let reservations = JSON.parse(localStorage.getItem('reservations') || '[]');
-                    // 删除预订
+
                     reservations = reservations.filter(r => r.id !== reservation.id);
-                    // 更新本地存储
+            
                     localStorage.setItem('reservations', JSON.stringify(reservations));
 
-                    // 关闭详情弹窗
+                  
                     detailsContainer.style.display = 'none';
 
-                    // 创建遮罩层
+                   
                     const overlay = document.createElement('div');
                     overlay.className = 'inline-success-overlay';
 
-                    // 创建页面内成功消息
+                
                     const successMessage = document.createElement('div');
                     successMessage.className = 'inline-success-message';
                     successMessage.innerHTML = `
@@ -801,28 +759,28 @@ function showReservationDetails(reservation) {
                         <button class="success-close">Confirm</button>
                     `;
 
-                    // 移除可能存在的其他成功消息
+                
                     const existingMessage = document.querySelector('.inline-success-overlay');
                     if (existingMessage) {
                         existingMessage.remove();
                     }
 
-                    // 将成功消息添加到遮罩层中
+                  
                     overlay.appendChild(successMessage);
                     document.body.appendChild(overlay);
 
-                    // 添加关闭按钮事件
+                
                     const closeBtn = successMessage.querySelector('.success-close');
                     closeBtn.addEventListener('click', () => {
                         if (overlay.parentNode) {
                             overlay.remove();
                         }
-                        // 重新加载预订列表
+                       
                         loadReservations();
                     });
                 });
 
-                // 点击遮罩层关闭
+              
                 confirmOverlay.addEventListener('click', (e) => {
                     if (e.target === confirmOverlay) {
                         document.body.removeChild(confirmOverlay);
@@ -830,13 +788,13 @@ function showReservationDetails(reservation) {
                 });
             };
 
-            // 添加修改按钮事件监听
+       
             const modifyBtn = document.querySelector('.modify-reservation-btn');
             modifyBtn.addEventListener('click', () => {
-                // 关闭详情弹窗
+             
                 detailsContainer.style.display = 'none';
 
-                // 显示预定表单并填充现有数据
+              
                 const reservationOverlay = document.createElement('div');
                 reservationOverlay.className = 'reservation-overlay';
                 reservationOverlay.innerHTML = `
@@ -881,25 +839,25 @@ function showReservationDetails(reservation) {
 
                 document.body.appendChild(reservationOverlay);
 
-                // 添加关闭按钮事件
+            
                 const closeBtn = reservationOverlay.querySelector('.close-btn');
                 closeBtn.addEventListener('click', () => {
                     document.body.removeChild(reservationOverlay);
                 });
 
-                // 点击遮罩层关闭
+             
                 reservationOverlay.addEventListener('click', (e) => {
                     if (e.target === reservationOverlay) {
                         document.body.removeChild(reservationOverlay);
                     }
                 });
 
-                // 处理表单提交
+            
                 const form = reservationOverlay.querySelector('#modifyReservationForm');
                 form.addEventListener('submit', (e) => {
                     e.preventDefault();
 
-                    // 获取表单数据
+                 
                     const formData = new FormData(form);
                     const updatedReservation = {
                         ...reservation,
@@ -912,7 +870,7 @@ function showReservationDetails(reservation) {
                         requests: formData.get('notes')
                     };
 
-                    // 更新预订数据
+                
                     let reservations = JSON.parse(localStorage.getItem('reservations')) || [];
                     const index = reservations.findIndex(r => r.id === reservation.id);
                     if (index !== -1) {
@@ -920,10 +878,10 @@ function showReservationDetails(reservation) {
                         localStorage.setItem('reservations', JSON.stringify(reservations));
                     }
 
-                    // 移除修改表单
+                 
                     document.body.removeChild(reservationOverlay);
 
-                    // 显示成功消息
+                  
                     const successMessage = document.createElement('div');
                     successMessage.className = 'success-overlay';
                     successMessage.innerHTML = `
@@ -937,17 +895,17 @@ function showReservationDetails(reservation) {
 
                     document.body.appendChild(successMessage);
 
-                    // 添加关闭按钮事件
+                 
                     const closeSuccessBtn = successMessage.querySelector('.success-close');
                     closeSuccessBtn.addEventListener('click', () => {
                         document.body.removeChild(successMessage);
-                        // 重新加载预订列表
+                      
                         loadReservations();
                     });
                 });
             });
 
-            // 添加关闭按钮事件监听
+       
             const closeBtn = document.getElementById('closeDetails');
             closeBtn.onclick = () => {
                 detailsContainer.style.display = 'none';
@@ -960,7 +918,7 @@ function showReservationDetails(reservation) {
         });
 }
 
-// 初始化帮助功能
+
 function initHelp() {
     const helpBtn = document.querySelector('.help-btn');
     const helpOverlay = document.getElementById('helpOverlay');
@@ -971,20 +929,20 @@ function initHelp() {
         return;
     }
 
-    // 显示帮助窗口
+   
     helpBtn.addEventListener('click', () => {
         console.log('Help button clicked');
         helpOverlay.style.display = 'flex';
         document.body.style.overflow = 'hidden';
     });
 
-    // 关闭帮助窗口
+
     closeHelpBtn.addEventListener('click', () => {
         helpOverlay.style.display = 'none';
         document.body.style.overflow = '';
     });
 
-    // 点击遮罩层关闭
+ 
     helpOverlay.addEventListener('click', (e) => {
         if (e.target === helpOverlay) {
             helpOverlay.style.display = 'none';
@@ -1017,22 +975,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     hero.addEventListener('mouseleave', startAutoPlay);
 
-    // 悬停时暂停自动播放
+ 
     carousel.addEventListener("mouseenter", function () {
         this.carousel("pause");
     });
 
-    // 初始化
+   
     goToSlide(0);
     startAutoPlay();
 });
 
 
-// 在页面加载完成后初始化
+
 document.addEventListener('DOMContentLoaded', () => {
     loadRestaurants();
     setupSearch();
     setupScrollToTop();
     showLoadingAnimation();
-    initReservations(); // 初始化预定功能
+    initReservations();
 });   
