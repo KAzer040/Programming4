@@ -46,6 +46,7 @@
                 </div>
             </div>
 
+            <!-- 左右切换按钮 -->
             <div class="carousel-controls">
                 <button class="carousel-control-prev" type="button" data-bs-target="#heroSlider" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -427,12 +428,14 @@
             }
         }
 
+        // 创建Vue应用
         const app = createApp({
             components: {
                 'contact-us': ContactUs
             }
         })
 
+        // 挂载Vue应用
         app.mount('#app')
     </script>
 
