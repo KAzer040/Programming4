@@ -28,7 +28,7 @@ header {
 
 header h1 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 2rem; /* 减小标题大小 */
 }
 
 nav ul {
@@ -39,7 +39,7 @@ nav ul {
     justify-content: center;
     width: 100%;
     position: relative;
-    margin: 0.5rem 0; 
+    margin: 0.5rem 0; /* 减小导航菜单的间距 */
 }
 
 nav ul li {
@@ -54,10 +54,11 @@ nav ul li a {
     text-align: center;
     display: inline-block;
     width: 100%;
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* 减小导航链接的字体大小 */
 }
 
 
+/* Hero 容器 */
 #hero {
     margin-top: 0.3rem;
     position: relative;
@@ -132,10 +133,10 @@ nav ul li a {
 }
 
 
-
+/* 响应式设计 */
 @media (max-width: 768px) {
     #hero {
-        height: 400px; 
+        height: 400px; /* 在移动设备上使用较小的高度 */
     }
     
     .hero-text h2 {
@@ -395,7 +396,7 @@ footer {
     100% { transform: rotate(360deg); }
 }
 
-
+/* 响应式布局 */
 @media (max-width: 1024px) {
     .restaurant-container {
         grid-template-columns: repeat(2, 1fr); 
@@ -428,7 +429,7 @@ footer {
     }
 }
 
-
+/* 卡片按钮样式 */
 .card-buttons {
     display: flex;
     flex-direction: column;
@@ -456,7 +457,7 @@ footer {
     background-color: #555;
 }
 
-
+/* 详情页面样式 */
 .details-overlay {
     position: fixed;
     top: 0;
@@ -589,7 +590,7 @@ footer {
     border-bottom: none;
 }
 
-
+/* 响应式设计 */
 @media (max-width: 768px) {
     .details-content {
         grid-template-columns: 1fr;
@@ -608,7 +609,7 @@ footer {
     }
 }
 
-
+/* 预定按钮样式 */
 .reserve-btn {
     display: block;
     width: 100%;
@@ -636,7 +637,7 @@ footer {
     box-shadow: none;
 }
 
-
+/* 预定表单样式 */
 .reservation-overlay {
     position: fixed;
     top: 0;
@@ -722,7 +723,7 @@ footer {
     background-color: #333;
 }
 
-
+/* 成功消息样式 */
 .success-overlay {
     position: fixed;
     top: 0;
@@ -797,7 +798,7 @@ footer {
     }
 }
 
-
+/* 响应式调整 */
 @media (max-width: 768px) {
     .reservation-container {
         width: 95%;
@@ -806,7 +807,7 @@ footer {
 
     .form-group input,
     .form-group textarea {
-        font-size: 16px;     
+        font-size: 16px;        /* 移动端更好的输入体验 */
     }
 }
 
@@ -825,7 +826,7 @@ footer {
     background-color: #555;
 }
 
-
+/* 预定列表样式 */
 .reservations-overlay {
     position: fixed;
     top: 0;
@@ -949,7 +950,7 @@ footer {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-
+/* 预定详情样式 */
 .reservation-details {
     display: none;
     position: fixed;
@@ -1056,7 +1057,7 @@ footer {
     }
 }
 
-
+/* 预定详情新样式 */
 .reservation-details-grid {
     display: grid;
     grid-template-columns: 300px 1fr;
@@ -1116,7 +1117,7 @@ footer {
     background-color: #45a049;
 }
 
-
+/* 响应式设计更新 */
 @media (max-width: 968px) {
     .reservation-details-grid {
         grid-template-columns: 1fr;
@@ -1142,7 +1143,7 @@ footer {
     }
 }
 
-
+/* 页面内成功消息样式 */
 .inline-success-message {
     background-color: #f8fff8;
     border: 2px solid #4CAF50;
@@ -1211,7 +1212,7 @@ footer {
     box-shadow: none;
 }
 
-
+/* 添加遮罩层 */
 .inline-success-overlay {
     position: fixed;
     top: 0;
@@ -1225,6 +1226,7 @@ footer {
     z-index: 9998;
 }
 
+/* 自定义确认对话框样式 */
 .confirm-dialog-overlay {
     position: fixed;
     top: 0;
@@ -1299,7 +1301,7 @@ footer {
     background-color: #c82333;
 }
 
-
+/* 分页导航样式 */
 .pagination {
     display: flex;
     justify-content: center;
@@ -1344,6 +1346,7 @@ footer {
     margin: 0 20px;
 }
 
+/* 米其林推荐列表样式 */
 .linchemi-guide {
     padding: 40px 20px;
     background-color: #f9f9f9;
@@ -1419,6 +1422,7 @@ footer {
     height: 100%;
 }
 
+/* 帮助按钮样式 */
 .help-btn {
     position: fixed;
     bottom: 20px;
@@ -1444,6 +1448,7 @@ footer {
     transform: scale(1.1);
 }
 
+/* 帮助窗口样式 */
 .help-overlay {
     position: fixed;
     top: 0;
@@ -1538,6 +1543,28 @@ footer {
 }
 
 
+/* Contact Us 组件样式 */
+/* .contact-section {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  margin: 2rem auto;
+  max-width: 800px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contact-section h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+} */
 
 .form-group {
   display: flex;
